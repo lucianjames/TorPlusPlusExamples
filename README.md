@@ -15,3 +15,6 @@ You can specify the path to the tor.exe executable in the torSocket constructor 
 
 
 I might make some kind of script to automate doing this, I dont want to just place the files in here as they will become outdated.
+
+## ⚠️ Security ⚠️
+⚠️ Absolutely no guarantees on security/anonymity when using this code to talk to TOR ⚠️
