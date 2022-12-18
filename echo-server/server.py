@@ -24,8 +24,11 @@ print('Connected by', addr)
 # Receive data from the client
 data = conn.recv(1024)
 
-# Echo the data back to the client
-conn.sendall("Hello from TOR! You sent: " + str(data))
+# Print the data
+print("Received: ", data)
+
+# Send the data back to the client with an added message
+conn.sendall(b'Hello from TOR! You sent: ' + data)
 
 # Close the connection
 conn.close()
