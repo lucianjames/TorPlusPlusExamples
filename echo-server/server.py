@@ -3,6 +3,17 @@
 import socket
 import threading
 
+def handle_connection(conn):
+    while True:
+        # Receive data from the client
+        data = conn.recv(1024)
+        if not data:
+            break
+
+        # Send it back
+        conn.sendall(b'Hello from TOR! You sent: ' + data)
+    conn.close()
+
 # Some setup
 HOST = '127.0.0.1'
 PORT = 8080
@@ -20,14 +31,3 @@ while True:
     t = threading.Thread(target=handle_connection, args=(conn,))
     t.start()
 
-
-def handle_connection(conn):
-    while True:
-        # Receive data from the client
-        data = conn.recv(1024)
-        if not data:
-            break
-
-        # Send it back
-        conn.sendall(b'Hello from TOR! You sent: ' + data)
-    conn.close()
