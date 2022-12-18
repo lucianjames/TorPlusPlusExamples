@@ -1,3 +1,4 @@
 [submodule "TorPlusPlus"]
 	path = TorPlusPlus
 	url = https://www.github.com/lj3d/TorPlusPlus
+	branch = testing
