@@ -1,34 +1,33 @@
 # socket server that listens on port 8080 for incoming data and simply echoes it back to the client.
 
 import socket
+import threading
 
-# Listen on 127.0.0.1:8080
+# Some setup
 HOST = '127.0.0.1'
 PORT = 8080
-
-# Create a socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Bind to the port
 s.bind((HOST, PORT))
+s.listen(8)
 
-# Wait for a client connection
-s.listen(1)
+# Main loop
+while True:
+    # Accept incoming connections
+    conn, addr = s.accept()
+    print('Connection from', addr)
 
-# Accept a connection
-conn, addr = s.accept()
+    # Start a new thread to handle the connection
+    t = threading.Thread(target=handle_connection, args=(conn,))
+    t.start()
 
-# Print the connection address
-print('Connected by', addr)
 
-# Receive data from the client
-data = conn.recv(1024)
+def handle_connection(conn):
+    while True:
+        # Receive data from the client
+        data = conn.recv(1024)
+        if not data:
+            break
 
-# Print the data
-print("Received: ", data)
-
-# Send the data back to the client with an added message
-conn.sendall(b'Hello from TOR! You sent: ' + data)
-
-# Close the connection
-conn.close()
+        # Send it back
+        conn.sendall(b'Hello from TOR! You sent: ' + data)
+    conn.close()
