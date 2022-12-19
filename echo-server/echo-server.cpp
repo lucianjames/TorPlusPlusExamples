@@ -9,11 +9,12 @@
 
 int main(){
     torPlusPlus::torSocket torSock;
-    torSock.startProxy(); // Use default settings
-    torSock.connectTo(HOST); // Connect the proxy to the onion address (Default port is 80)
+    torSock.startAndConnectToProxy(); // Start the proxy and connect to it
+    torSock.connectProxyTo(HOST); // Connect the proxy to the onion address (Default port is 80)
     torSock.proxySend("Hello World!", 12); // Send a message to the hidden service
     char buf[16384] = {0}; // Up to 16KB of memory for whatever gets sent back
     torSock.proxyRecv(buf, sizeof(buf) * sizeof(char)); // Receive a response
     printf("%s\n", buf); // Print whatever the server sent back
+    torSock.close();
     return 0;
 }

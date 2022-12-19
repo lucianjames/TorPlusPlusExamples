@@ -1,2 +1,3 @@
 build/
 echo-server/gitIgnoredOnionAddress.h
+.vscode/settings.json
