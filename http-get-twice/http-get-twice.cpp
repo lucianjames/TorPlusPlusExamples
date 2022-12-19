@@ -17,7 +17,7 @@ int main(){
         char buf[16384] = {0}; // Up to 16KB of memory for whatever gets sent back
         torSock.proxyRecv(buf, sizeof(buf) * sizeof(char)); // Receive a response to the GET request
         printf("%s\n", buf); // Print whatever the server sent back
-        torSock.close();
+        torSock.closeTorSocket(); // Close the socket
     }
 
     return 0;
